@@ -48,19 +48,19 @@ public_users.get('/isbn/:isbn',function (req, res) {
 public_users.get('/author/:author',function (req, res) {
   let promise = new Promise((resolve, reject) => {
     let author = req.params.author;
-    let filteredBooks = [];
+    let booksbyauthor = [];
     
     Object.keys(books).forEach(key => {
       if (books[key].author === author) {
-        filteredBooks.push(books[key]);
+        booksbyauthor.push(books[key]);
       }
     })
 
-    if (filteredBooks.length <= 0) {
+    if (booksbyauthor.length <= 0) {
       res.send("No books were found by this author.");
     }
 
-    res.send(JSON.stringify(filteredBooks));
+    res.send(JSON.stringify({booksbyauthor},null,4));
   });
 
   promise.then();
@@ -70,19 +70,19 @@ public_users.get('/author/:author',function (req, res) {
 public_users.get('/title/:title',function (req, res) {
   let promise = new Promise((resolve, reject) => {
     let title = req.params.title;
-    let filteredBooks = [];
+    let booksbytitle = [];
 
     Object.keys(books).forEach(key => {
       if (books[key].title === title) {
-        filteredBooks.push(books[key]);
+        booksbytitle.push(books[key]);
       }
     })
 
-      if (filteredBooks.length <= 0) {
+      if (booksbytitle.length <= 0) {
         res.send("No books were found by this title.");
       }
 
-      res.send(JSON.stringify(filteredBooks));
+      res.send(JSON.stringify({booksbytitle},null,4));
     });
 
     promise.then();
